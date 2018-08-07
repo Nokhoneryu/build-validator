@@ -1,0 +1,28 @@
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./index.js"></script>
+
+    <!-- === BOOTSTRAP CDN === -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+</head>
+
+<body onload="bang()">
+    <!-- <button type="button" id="caburro" onclick="bang()">Quem é burro?!</button> -->
+<!-- <div class="container">[SPACER]</div> -->
+    <div class="container mt-5">
+        <div class="jumbotron">
+            <h1 class="display-4">Hello, the last completed build was the <span style="font-weight: 500" id="number"></span></h1>
+            <p class="lead">This build compiled the following: <span style="font-weight: 500" id="modules"></span></p>
+            <hr class="my-4">
+            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+            <a id="url" class="btn btn-primary btn-lg" href="#" role="button">Go to details</a>
+        </div>
+    </div>
+</body>
+
+</html>
