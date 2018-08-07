@@ -1,31 +1,35 @@
-//$('#caburro').click(
+// Every 50 min check for failed builds
+// 50 min = 3000000ms
+setInterval(function(){ttsFailBuild();}, 600000)
 
-function bang() {
-  console.log("Jenkins call");
-	
+function ttsFailBuild() {
   $.ajax({
     'url' : 'http://gestoss-dev-ci.c.ptin.corppt.com/job/sigo_trunk_build+package+publish/api/json?pretty=true',
     'type' : 'GET',
 	'crossDomain' : 'true',
-  //Any post-data/get-data parameters
-  //This is optional
-  //  'data' : {
-  //    'paramater1' : 'value',
-  //    'parameter2' : 'another value'
-  //  },
     'success' : function(data) {
       if (data) {
-        console.log(data.lastCompletedBuild.number);
-
-        $("#number").text(data.lastCompletedBuild.number);
-        $("#url").attr("href", data.lastCompletedBuild.url);
-        $("#modules").text(data.description);
-
-        // $.each(data, function( index, value ) {
-        //   alert( index + ": " + value );
-
-        // });
-
+		  console.log(data.lastUnsuccessfulBuild.number + 1);
+		  console.log(data.nextBuildNumber);
+		  var buildNumber = data.lastUnsuccessfulBuild.number;
+		  //if((data.lastUnsuccessfulBuild.number + 1) == data.nextBuildNumber) {
+		  if(true) {
+			  $.ajax({
+				'url' : 'http://gestoss-dev-ci.c.ptin.corppt.com/job/sigo_trunk_build+package+publish/' + buildNumber + '/api/json?pretty=true',
+				'type' : 'GET',
+				'crossDomain' : 'true',
+				'success' : function(data) {
+				  if (data) {			
+					  var fullName = data.changeSets[0].items[0].author.fullName;
+					  var msg = new SpeechSynthesisUtterance(fullName);
+					  window.speechSynthesis.speak(msg);	
+					  msg.onend = function(event) {
+						document.getElementById('burro').play();
+					  }
+				  }
+				}
+			  });
+		  }
       }
     }
   });
